@@ -1,10 +1,10 @@
-const User = require("../models/user.model");
-const bcrypt = require("bcryptjs");
-const {generateToken} = require("../lib/utils.js");
-const cloudinary  = require("cloudinary");
+import User from '../models/user.model.js';
+import bcrypt from 'bcryptjs';
+import { generateToken } from '../lib/utils.js';
+import cloudinary from 'cloudinary';
 
 
-const signup =async (req,res)=>{
+export const signup =async (req,res)=>{
     const {email , fullName , password} = req.body;
 
         try{
@@ -71,7 +71,7 @@ const signup =async (req,res)=>{
 
 }
 
-const login = async (req,res)=>{
+export const login = async (req,res)=>{
 
     const {email , password} = req.body;
 
@@ -112,7 +112,7 @@ const login = async (req,res)=>{
 }
 
 
-const logout = (req,res)=>{
+export const logout = (req,res)=>{
 
     try{
 
@@ -138,7 +138,7 @@ const logout = (req,res)=>{
 }
 
 
-const  updateProfile = async (req,res) =>{
+export const  updateProfile = async (req,res) =>{
 
     try{
 
@@ -177,7 +177,7 @@ const  updateProfile = async (req,res) =>{
 }
 
 
-const checkAuth = (req,res)=>{
+export const checkAuth = (req,res)=>{
     try{
         return res.status(200).json(req.user)
     }catch(error){
@@ -193,6 +193,3 @@ const checkAuth = (req,res)=>{
 
 
 
-module.exports = {
-    signup , login , logout , updateProfile , checkAuth
-}

@@ -1,17 +1,17 @@
-const { Server } = require("socket.io");
-const http = require("http");
-const express = require("express");
+import { Server } from 'socket.io';
+import http from 'http';
+import express from 'express';
 
-const app = express();
-const server = http.createServer(app);
+export const app = express();
+export const server = http.createServer(app);
 
-const io = new Server(server, {
+export const io = new Server(server, {
     cors: {
         origin: ["http://localhost:5173"],
     },
 });
 
-function getRecieverSocketId(userId){
+export function getRecieverSocketId(userId){
 
     return userSocketMap[userId];
 
@@ -35,4 +35,3 @@ io.on("connection", (socket) => { // Fixed typo here
     });
 });
 
-module.exports = {io , server, app , getRecieverSocketId};
