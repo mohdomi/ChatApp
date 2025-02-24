@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
-import SidebarSkeleton from "./skeletons/SidebarSkeleton";
+import {SidebarSkeleton} from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 
 const Sidebar = () => {
@@ -10,14 +10,16 @@ const Sidebar = () => {
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
+  let filteredUsers = [];
+
   useEffect(() => {
+    filteredUsers = showOnlineOnly ? users.filter((user) => onlineUsers.includes(user._id)) : users;
     getUsers();
   }, [getUsers]);
 
-  // const filteredUsers = showOnlineOnly ? users.filter((user) => onlineUsers.includes(user._id)) : users;
-  
-  const filteredUsers = showOnlineOnly ? users.filter((user)=> onlineUsers.includes(user._id)) : users
-  console.log(filteredUsers);
+
+  // const filteredUsers = showOnlineOnly && Array.isArray(users)? users.filter((user)=> onlineUsers.includes(user._id)) : users
+  console.log("behen ka loda : " ,  filteredUsers);
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
